@@ -1,6 +1,7 @@
 const {Shop, Item} = require("../src/gilded_rose");
 
 describe("Gilded Rose", function() {
+  const days = 4;
   it("should foo", function() {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     const items = gildedRose.updateQuality();
@@ -8,20 +9,18 @@ describe("Gilded Rose", function() {
   });
 
   it("+5 Dexterity Vest test", function() {
-    const gildedRose = new Shop([new Item("vest", 1, 20)]);
-    const days = 2;
+    const gildedRose = new Shop([new Item("+5 Dexterity Vest", 10, 20)]);
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
     }
-    expect(items[0].name).toBe("vest");
-    expect(items[0].sellIn).toBe(-1);
-    expect(items[0].quality).toBe(17);
+    expect(items[0].name).toBe("+5 Dexterity Vest");
+    expect(items[0].sellIn).toBe(6);
+    expect(items[0].quality).toBe(16);
   });
 
   it("Aged Brie", function() {
     const gildedRose = new Shop([new Item("Aged Brie", 2, 0)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -33,7 +32,6 @@ describe("Gilded Rose", function() {
 
   it("Elixir of the Mongoose test", function() {
     const gildedRose = new Shop([new Item("Elixir of the Mongoose", 5, 7)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -45,7 +43,6 @@ describe("Gilded Rose", function() {
 
   it("Sulfuras, Hand of Ragnaros test", function() {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 0, 80)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -57,7 +54,6 @@ describe("Gilded Rose", function() {
 
   it("Sulfuras, Hand of Ragnaros test 2", function() {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 80)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -69,7 +65,6 @@ describe("Gilded Rose", function() {
 
   it("Backstage passes to a TAFKAL80ETC concert test", function() {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -81,7 +76,6 @@ describe("Gilded Rose", function() {
 
   it("Backstage passes to a TAFKAL80ETC concert test 2", function() {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -93,7 +87,6 @@ describe("Gilded Rose", function() {
 
   it("Backstage passes to a TAFKAL80ETC concert test 3", function() {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -104,15 +97,14 @@ describe("Gilded Rose", function() {
   });
 
   it("conjured with normal condition", function() {
-    const gildedRose = new Shop([new Item("Conjured", 3, 5)]);
+    const gildedRose = new Shop([new Item("Conjured", 3, 6)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).toBe(2);
-    expect(items[0].quality).toBe(3);
+    expect(items[0].quality).toBe(4);
   });
 
   it("The quality of conjured item is never negative", function() {
     const gildedRose = new Shop([new Item("Conjured", 1, 1)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
@@ -123,7 +115,6 @@ describe("Gilded Rose", function() {
 
   it("conjured with degrading in quality twice as fast as a normal item when sellIn is negative", function() {
     const gildedRose = new Shop([new Item("Conjured", 1, 20)]);
-    const days = 4;
     let items;
     for (let day = 0; day < days; day++) {
       items = gildedRose.updateQuality();
