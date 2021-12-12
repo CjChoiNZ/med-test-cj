@@ -14,7 +14,7 @@ describe("Gilded Rose", function() {
     expect(items[0].quality).toBe(3);
   });
 
-  it("conjured with zero quality condition", function() {
+  it("The quality of conjured item is never negative", function() {
     const gildedRose = new Shop([new Item("Conjured", 1, 1)]);
     const days = 4;
     let items;
